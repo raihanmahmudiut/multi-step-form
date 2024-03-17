@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Button from "./button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Step2() {
+
+	const navigate = useNavigate()
 	const cardData = [
 		{
 			icon: "icon-arcade",
@@ -34,7 +36,7 @@ function Step2() {
 	const handleSubmit = (values) => {
 		// Store form values in localStorage
 		localStorage.setItem("step2FormData", JSON.stringify(values));
-		console.log(values);
+		navigate('/step3')
 	};
 
 	const [formData, setFormData] = useState();
@@ -135,14 +137,14 @@ function Step2() {
 					)}
 				</Formik> */}
 			<div className="flex justify-between mt-5">
-				<Link to="/">
-					<button className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline">
+				
+					<button className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline" onClick={()=> navigate("/")}>
 						Go Back
 					</button>
-				</Link>
-				<Link to="/step3">
-					<Button type="submit">Next Step</Button>
-				</Link>
+				
+				
+				<Button type="submit" onClick={() => navigate("/step3")}>Next Step</Button>
+				
 			</div>
 		</div>
 	);
