@@ -1,108 +1,142 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./button";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 function Step3() {
-
 	const addons = [
-		{ value: "onlineService", label: "Online Service", price: "$1/mo" },
-		{ value: "largerStorage", label: "Larger Storage", price: "$2/mo" },
-		{ value: "customizableProfile", label: "Customizable Profile", price: "$2/mo" },
-	  ];
-	const navigate = useNavigate()
+		{
+			id: 1,
+			value: "onlineService",
+			tag: "Access to multiplayer games",
+			label: "Online Service",
+			price: 1,
+		},
+		{
+			id: 2,
+			value: "largerStorage",
+			tag: "Extra 1TB of cloud save",
+			label: "Larger Storage",
+			price: 2,
+		},
+		{
+			id: 3,
+			value: "customizableProfile",
+
+			tag: "Custom theme on your profile",
+			label: "Customizable Profile",
+			price: 2,
+		},
+	];
+	const navigate = useNavigate();
 	const validationSchema = Yup.object().shape({
-		addons: Yup.array().required("Please select at least one addon"),
+		addons: Yup.array().min(1, "Please select at least one addon").required(),
 	});
 
-	console.log(JSON.parse(localStorage.getItem("step3FormData")))
+	const storageData = JSON.parse(localStorage.getItem("step3FormData"));
+
+	console.log(storageData);
 	// Retrieve form values from localStorage for pre-filling
-	const initialValues = JSON.parse(localStorage.getItem("step3FormData")) || {
-		addons: [],
+	const initialValues = {
+		addons: storageData || [],
 	};
 
 	// Get selected addons from localStorage
-	const selectedAddons = initialValues.addons;
+	const [selectedAddons, setSelectedAddons] = useState(initialValues.addons);
 
 	// Function to check if addon is selected
 	const isAddonSelected = (addon) => {
-	  return selectedAddons.includes(addon);
+		return selectedAddons.some(
+			(selectedAddon) => selectedAddon.id === addon.id
+		);
 	};
-  
+
+	// Update selected addons state and highlight when checked
+	const handleAddonChange = (addon) => {
+		let updatedAddons;
+
+		if (isAddonSelected(addon)) {
+			updatedAddons = selectedAddons.filter(
+				(selectedAddon) => selectedAddon.id !== addon.id
+			);
+		} else {
+			updatedAddons = [...selectedAddons, addon];
+		}
+		setSelectedAddons(updatedAddons);
+	};
 
 	// Handle form submission
-	const handleSubmit = (values) => {
+	const handleSubmit = () => {
 		// Store form values in localStorage
-		localStorage.setItem("step3FormData", JSON.stringify(values));
-
-		navigate("/step4")
-		
+		localStorage.setItem("step3FormData", JSON.stringify(selectedAddons));
+		navigate("/step4");
 	};
 
-	let tempSelectedAddons = []
+	// Count number of checked items
+	const checkedCount = selectedAddons.length;
 
-	const handleChange = (values) => { 
-		tempSelectedAddons = [...selectedAddons, values]
-		console.log(tempSelectedAddons)
-	}
+	// Repopulate the checked items from localStorage on reload
+	useEffect(() => {
+		setSelectedAddons(initialValues.addons);
+	}, []);
+
+	console.log(selectedAddons);
 
 	return (
-		<div className="font-ubuntu h-full flex flex-col justify-between w-full">
-			{/* Formik form */}
-			<Formik
-				initialValues={initialValues}
-				validationSchema={validationSchema}
-				onSubmit={handleSubmit}
-				className="font-ubuntu h-full w-full"
-			>
-				{(formik) => (
-					<Form className="flex flex-col justify-between h-full w-full">
-						<div className="w-full">
-							<h1 className="text-2xl text-marineBlue font-bold mb-3">
-								Pick add-ons
-							</h1>
-							<h2 className="text-md text-coolGray font-semibold mb-3">
-								Add-ons help enhance your gaming experience
-							</h2>
-							{addons.map((addon) => (
-                <div
-                  key={addon.value}
-                  className={`mb-4 flex flex-row w-full justify-between ${
-                    isAddonSelected(addon.value) ? "bg-yellow-200" : ""
-                  } checkbox-container`}
-                  data-id={addon.value}
-                >
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    <Field
-                      type="checkbox"
-                      name="addons"
-                      value={addon.value}
-											className="mr-2"
-											onChange={handleChange}
-                    />
-                    <span className="text-black">{addon.label}</span>
-                  </label>
-                  <p className="text-black">{addon.price}</p>
-                </div>
-              ))}
-							<div className="text-red-500 text-sm">
-								<ErrorMessage name="addons" />
-							</div>
+		<div className="flex flex-col justify-center items-center h-full mt-6">
+			<div className="font-ubuntu flex flex-col justify-between h-full lg:w-4/5 w-full ">
+				<div className="w-full">
+					<h1 className="text-2xl text-marineBlue font-bold mb-3">
+						Pick add-ons
+					</h1>
+					<h2 className="text-md text-coolGray font-semibold mb-3">
+						Add-ons help enhance your gaming experience
+					</h2>
+					{addons.map((addon) => (
+						<div
+							key={addon.id}
+							className={`  mb-4 py-10 px-5 flex flex-row w-full border-2 rounded-md h-10 items-center justify-between ${
+								isAddonSelected(addon)
+									? "bg-magnolia border-purplishBlue"
+									: "bg-white border-lightGray"
+							} checkbox-container`}
+						>
+							<label className=" cursor-pointer text-gray-700 text-sm font-bold flex flex-row gap-10 items-center">
+								<input
+									type="checkbox"
+									name={addon.label}
+									checked={isAddonSelected(addon)}
+									onChange={() => handleAddonChange(addon)}
+									className="mr-2  accent-purplishBlue  "
+								/>
+
+								<div className="flex flex-col justify-start ">
+									<span className="text-marineBlue text-lg font-semibold">
+										{addon.label}
+									</span>
+									<span className="text-sm text-coolGray">{addon.tag}</span>
+								</div>
+							</label>
+
+							<p className="text-purplishBlue">+${addon.price}/mo</p>
 						</div>
-						<div className="flex justify-between">
-							
-							<button className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline" onClick={() => navigate("/step2")}>
-									Go Back
-								</button>
-							
-							
-								<Button>Next Step</Button>
-							
-						</div>
-					</Form>
-				)}
-			</Formik>
+					))}
+					<div className="text-red-500 text-sm">
+						{checkedCount === 0 && <p>Please select at least one addon</p>}
+					</div>
+				</div>
+				<div className="flex justify-between absolute lg:static z-99 bottom-[-10rem] right-[-3.1rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
+					<button
+						className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
+						onClick={() => navigate("/step2")}
+					>
+						Go Back
+					</button>
+					<Button onClick={handleSubmit} disabled={checkedCount === 0}>
+						Next Step
+					</Button>
+				</div>
+			</div>
 		</div>
 	);
 }

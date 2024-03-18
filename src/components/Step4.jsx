@@ -5,48 +5,30 @@ import Button from "./button";
 function Step4() {
 	const [subscription, setSubscription] = useState(null);
 	const [addons, setAddons] = useState([]);
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		// Retrieve subscription data from localStorage
 		const storedSubscription = localStorage.getItem("step2FormData");
 		if (storedSubscription) {
-			const { plan } = JSON.parse(storedSubscription);
-			setSubscription({ name: plan, cost: getSubscriptionCost(plan) });
-			console.log(plan);
+			const subscriptions = JSON.parse(storedSubscription);
+			setSubscription({
+				name: subscriptions.label,
+				cost: subscriptions.cost,
+				period: subscriptions.period,
+			});
 		}
 
 		// Retrieve addons data from localStorage
 		const storedAddons = localStorage.getItem("step3FormData");
 		if (storedAddons) {
-			const { addons: selectedAddons } = JSON.parse(storedAddons);
+			const selectedAddons = JSON.parse(storedAddons);
 			setAddons(selectedAddons);
 		}
 	}, []);
 
-	// Function to calculate the cost of the selected subscription plan
-	const getSubscriptionCost = (plan) => {
-		// Define subscription costs based on plans
-		const planCosts = {
-			arcade: 9,
-			advanced: 12,
-			pro: 15,
-		};
+	
 
-		return planCosts[plan];
-	};
-
-	// Function to calculate the cost of each addon
-	const getAddonCost = (addon) => {
-		// Define addon costs based on selection
-		const addonCosts = {
-			onlineService: 1,
-			largerStorage: 2,
-			customizableProfile: 2,
-		};
-
-		return addonCosts[addon];
-	};
 
 	// Calculate total cost based on subscription and add-ons
 	const calculateTotal = () => {
@@ -57,52 +39,86 @@ function Step4() {
 			total += subscription.cost;
 		}
 
-		// Add add-ons cost
+		// Add add-ons cost foer both monthly and yearly subscriptions
 		addons.forEach((addon) => {
-			total += addon.cost;
+			if (subscription.period === "Monthly") {
+				total += addon.price;
+			} else {
+				total += addon.price * 12; 
+			}
 		});
 
 		return total;
 	};
 
 	return (
-		<div className="font-ubuntu text-black h-full flex flex-col justify-between">
-			<div>
-				<h2 className="text-lg font-semibold mb-3">
-					Double-check everything looks OK before confirming
-				</h2>
-				<div className="mb-4">
-					<h3 className="text-md font-semibold">Subscription Details:</h3>
-					{subscription && (
-						<div>
-							<p>{subscription.name}</p>
-							<p>{subscription.cost}</p>
-						</div>
-					)}
-				</div>
-				<div className="mb-4">
-					<h3 className="text-md font-semibold">Add-ons:</h3>
-					{addons.map((addon) => (
-						<div key={addon}>
-							<p>{addon}</p>
-						</div>
-					))}
-				</div>
-				<div className="mb-4">
-					<h3 className="text-md font-semibold">Total (per month/year):</h3>
-					<p>{calculateTotal()}</p>
-				</div>
-			</div>
+		<div className="flex flex-col justify-center items-center h-full mt-6">
+			<div className="font-ubuntu flex flex-col justify-between h-full lg:w-4/5 w-full ">
+				<div>
+					<div className="flex flex-col gap-3">
+						<h2 className="text-marineBlue font-bold text-2xl">Finishing Up</h2>
+						<h2 className="text-lg text-coolGray font-semibold mb-3">
+							Double-check everything looks OK before confirming
+						</h2>
+					</div>
 
-			<div className="flex justify-between w-full">
-				<button
-					className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
-					onClick={() => navigate("/step3")}
-				>
-					Go Back
-				</button>
+					<div className="bg-magnolia rounded-md p-5">
+						<div className="mb-4">
+							{subscription && (
+								<div className="flex flex-row w-full items-center justify-between">
+									<div className="flex flex-col">
+										<p className="text-marineBlue font-bold text-lg">
+											{subscription.name}
+											<span>({subscription.period})</span>
+										</p>
+										<h6
+											className="cursor-pointer text-sm text-coolGray"
+											onClick={() => navigate("/step2")}
+										>
+											Change
+										</h6>
+									</div>
+									<p className="text-marineBlue font-semibold text-md ">
+										${subscription.cost}
+										{subscription.period === "Monthly" ? "/mo" : "/yr"}
+									</p>
+								</div>
+							)}
+						</div>
+						<div className="mb-4 text-coolGray">
+							{addons.map((addon) => (
+								<div
+									key={addon.id}
+									className="flex flex-row w-full justify-between items-center"
+								>
+									<p>{addon.label}</p>
+									<p>${addon.price}/mo</p>
+								</div>
+							))}
+						</div>
+					</div>
+					<div className="mb-4  p-5 flex flex-row justify-between w-full">
+						<h3 className="text-md text-coolGray font-semibold">
+							Total (per {subscription?.period === "Monthly" ? "month" : "year"}
+							):
+						</h3>
+						<p className="text-purplishBlue text-lg font-bold">
+							${calculateTotal()}
+							{subscription?.period === "Monthly" ? "/mo" : "/yr"}
+						</p>
+					</div>
+				</div>
 
-				<Button onClick={() => navigate("/step5")}>Confirm</Button>
+				<div className="flex justify-between  absolute lg:static z-99 bottom-[-10rem] right-[-3.1rem] w-screen bg-white lg:bg-transparent  h-16 items-center px-2 lg:w-full">
+					<button
+						className="text-marineBlue font-bold lg:py-2 lg:px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
+						onClick={() => navigate("/step3")}
+					>
+						Go Back
+					</button>
+
+					<Button onClick={() => navigate("/step5")}>Confirm</Button>
+				</div>
 			</div>
 		</div>
 	);
