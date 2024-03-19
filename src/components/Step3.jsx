@@ -95,13 +95,13 @@ function Step3() {
 					{addons.map((addon) => (
 						<div
 							key={addon.id}
-							className={`  mb-4 py-10 px-5 flex flex-row w-full border-2 rounded-md h-10 items-center justify-between ${
+							className={`  mb-4 py-10 px-3 lg:px-5 flex flex-row w-full border-2 rounded-md h-10 items-center justify-between ${
 								isAddonSelected(addon)
 									? "bg-magnolia border-purplishBlue"
 									: "bg-white border-lightGray"
 							} checkbox-container`}
 						>
-							<label className=" cursor-pointer text-gray-700 text-sm font-bold flex flex-row gap-10 items-center">
+							<label className=" cursor-pointer text-gray-700 text-sm font-bold flex flex-row gap-1 md:gap-3 lg:gap-4  items-center">
 								<input
 									type="checkbox"
 									name={addon.label}
@@ -111,14 +111,18 @@ function Step3() {
 								/>
 
 								<div className="flex flex-col justify-start ">
-									<span className="text-marineBlue text-lg font-semibold">
+									<span className="text-marineBlue text-md lg:text-lg font-semibold">
 										{addon.label}
 									</span>
-									<span className="text-sm text-coolGray">{addon.tag}</span>
+									<span className="text-xs lg:text-sm text-coolGray">
+										{addon.tag}
+									</span>
 								</div>
 							</label>
 
-							<p className="text-purplishBlue">+${addon.price}/mo</p>
+							<p className="text-purplishBlue text-sm md::text-md lg:text-lg">
+								+${addon.price}/mo
+							</p>
 						</div>
 					))}
 					<div className="text-red-500 text-sm">

@@ -10,11 +10,11 @@ import Step5 from "./components/Step5";
 function App() {
 	return (
 		<div className=" w-full h-3/5 flex justify-center items-center z-9 ">
-			<div className="bg-white relative w-4/5 lg:w-3/5 flex flex-col lg:flex-row justify-center items-center px-4">
-				<div className="absolute lg:static top-0 z-10">
+			<div className="bg-white relative w-4/5 xl:w-3/5 flex flex-col xl:flex-row justify-center items-center px-4">
+				<div className="absolute xl:static top-0 z-10">
 					<Layout />
 				</div>
-				<div className="absolute lg:static top-32 z-50 bg-white rounded-md  px-6 py-2 w-full lg:h-[32rem] shadow-lg lg:shadow-none">
+				<div className="absolute xl:static top-32 z-50 bg-white rounded-md  px-6 py-2 w-full xl:h-[32rem] shadow-lg xl:shadow-none">
 					<Card />
 				</div>
 			</div>

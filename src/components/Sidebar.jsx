@@ -13,7 +13,7 @@ function Sidebar() {
 	};
 
 	return (
-		<div className="font-ubuntu lg:p-5 w-screen lg:w-52 flex flex-row items-center lg:items-start lg:flex-col bg-mobile lg:bg-desktop bg-cover h-[200px] lg:h-[35rem] gap-4 justify-center lg:justify-start">
+		<div className="font-ubuntu xl:p-5 w-screen xl:w-52 flex flex-row items-center xl:items-start xl:flex-col bg-mobile xl:bg-desktop bg-cover h-[200px] xl:h-[35rem] gap-4 justify-center xl:justify-start">
 			<div className="flex flex-row items-center gap-2">
 				<NavLink
 					to="/"
@@ -23,7 +23,7 @@ function Sidebar() {
 				>
 					<div>1</div>
 				</NavLink>{" "}
-				<div className="hidden lg:block text-coolGray">
+				<div className="hidden xl:block text-coolGray">
 					{" "}
 					STEP 1<br /> <span className="text-white">YOUR INFO</span>
 				</div>
@@ -38,7 +38,7 @@ function Sidebar() {
 				>
 					<div>2</div>
 				</NavLink>{" "}
-				<div className="hidden lg:block text-coolGray">
+				<div className="hidden xl:block text-coolGray">
 					STEP 2<br /> <span className="text-white">SELECT PLAN</span>
 				</div>
 			</div>
@@ -52,7 +52,7 @@ function Sidebar() {
 				>
 					<div>3</div>
 				</NavLink>{" "}
-				<div className="hidden lg:block text-coolGray">
+				<div className="hidden xl:block text-coolGray">
 					STEP 3<br /> <span className="text-white">ADD-ONS</span>
 				</div>
 			</div>
@@ -66,17 +66,17 @@ function Sidebar() {
 				>
 					<div>4</div>
 				</NavLink>{" "}
-				<div className="hidden lg:block text-coolGray">
+				<div className="hidden xl:block text-coolGray">
 					STEP 4<br /> <span className="text-white">SUMMARY</span>
 				</div>
 			</div>
 
 			<div>
 				<Button
-					classNameExtra="rounded-full w-10 h-10 lg:w-full gap-2 lg:h-fit flex flex-row items-center justify-center"
+					classNameExtra="rounded-full w-10 h-10 xl:w-full gap-2 xl:h-fit flex flex-row items-center justify-center"
 					onClick={() => handleReset()}
 				>
-					<span className="hidden lg:block">Reset Data</span>
+					<span className="hidden xl:block">Reset Data</span>
 					<span>
 						<BiReset className="w-8 h-8" />
 					</span>
