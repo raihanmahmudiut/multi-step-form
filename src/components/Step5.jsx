@@ -21,8 +21,12 @@ function Step5() {
 			<div className="flex flex-col justify-center items-center gap-5">
 				<img src={Thankyou} className="w-12 h-12 z-50" />
 				<h1 className="text-2xl font-bold mb-5 text-marineBlue">
-				Thank You{" "}
-					<span className="text-marineBlue font-bold">{storedUser.name}</span> !
+					Thank You{" "}
+					<span className="text-marineBlue font-bold">
+						{storedUser.name}
+						{storedUser.name == "Jubair Ahmad" ? "thank you peye khushi?" : ""}
+					</span>{" "}
+					!
 				</h1>
 
 				<p className="mb-4 px-6 text-coolGray text-center">
