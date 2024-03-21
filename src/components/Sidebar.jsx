@@ -8,8 +8,8 @@ function Sidebar() {
 
 	const handleReset = () => {
 		localStorage.removeItem("step1FormData");
-		location.removeItem("step2FormData");
-		location.removeItem("step3FormData");
+		localStorage.removeItem("step2FormData");
+		localStorage.removeItem("step3FormData");
 	};
 
 	return (
