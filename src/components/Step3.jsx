@@ -83,8 +83,8 @@ function Step3() {
 	console.log(selectedAddons);
 
 	return (
-		<div className="flex flex-col justify-center items-center h-full mt-6">
-			<div className="font-ubuntu flex flex-col justify-between h-full lg:w-4/5 w-full ">
+		<div className="flex flex-col justify-center items-center w-full h-full mt-6">
+			<div className="font-ubuntu flex flex-col justify-between h-full w-full lg:w-4/5 ">
 				<div className="w-full">
 					<h1 className="text-2xl text-marineBlue font-bold mb-3">
 						Pick add-ons
@@ -129,7 +129,7 @@ function Step3() {
 						{checkedCount === 0 && <p>Please select at least one addon</p>}
 					</div>
 				</div>
-				<div className="flex justify-between absolute lg:static z-99 bottom-[-10rem] right-[-3.1rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
+				<div className="flex justify-between absolute lg:static z-99 bottom-[-10rem] right-[-1rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
 					<button
 						className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
 						onClick={() => navigate("/step2")}

@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
 
 :root {
-	
-
 	color-scheme: light dark;
 	/* color: rgba(255, 255, 255, 0.87); */
-	background-color: 	#f0f6ff;
+	background-color: #f0f6ff;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -20,9 +18,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-  font-family: Ubuntu, sans-serif; 
+	font-family: Ubuntu, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Ensure full viewport height */
+	margin: 0; /* Remove default margin */
+	width: 100vw;
 }
-
-

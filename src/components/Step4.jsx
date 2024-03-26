@@ -27,9 +27,6 @@ function Step4() {
 		}
 	}, []);
 
-	
-
-
 	// Calculate total cost based on subscription and add-ons
 	const calculateTotal = () => {
 		let total = 0;
@@ -44,7 +41,7 @@ function Step4() {
 			if (subscription.period === "Monthly") {
 				total += addon.price;
 			} else {
-				total += addon.price * 12; 
+				total += addon.price * 12;
 			}
 		});
 
@@ -52,7 +49,7 @@ function Step4() {
 	};
 
 	return (
-		<div className="flex flex-col justify-center items-center h-full mt-6">
+		<div className="flex flex-col justify-center items-center w-full h-full mt-6">
 			<div className="font-ubuntu flex flex-col justify-between h-full lg:w-4/5 w-full ">
 				<div>
 					<div className="flex flex-col gap-3">
@@ -109,7 +106,7 @@ function Step4() {
 					</div>
 				</div>
 
-				<div className="flex justify-between  absolute lg:static z-99 bottom-[-10rem] right-[-3.1rem] w-screen bg-white lg:bg-transparent  h-16 items-center px-2 lg:w-full">
+				<div className="flex justify-between  absolute lg:static z-99 bottom-[-10rem] right-[-1rem] w-screen bg-white lg:bg-transparent  h-16 items-center px-2 lg:w-full">
 					<button
 						className="text-marineBlue font-bold lg:py-2 lg:px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
 						onClick={() => navigate("/step3")}

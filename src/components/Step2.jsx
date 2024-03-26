@@ -165,7 +165,7 @@ function Step2() {
 						</label>
 					</div>
 				</div>
-				<div className="flex justify-between absolute lg:static z-99 bottom-[-10rem] right-[-3.1rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
+				<div className="flex justify-between absolute lg:static z-99 bottom-[-10rem] right-[-1rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
 					<button
 						className="text-marineBlue font-bold py-2 px-4 rounded mr-4 focus:outline-none focus:shadow-outline"
 						onClick={() => navigate("/")}

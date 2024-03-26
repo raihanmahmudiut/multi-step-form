@@ -17,7 +17,7 @@ function Step5() {
 	}, [storedUser]);
 
 	return (
-		<div className=" flex flex-col justify-center items-center h-full mt-6">
+		<div className=" flex flex-col justify-center items-center w-full h-full mt-6">
 			<div className="flex flex-col justify-center items-center gap-5">
 				<img src={Thankyou} className="w-12 h-12 z-50" />
 				<h1 className="text-2xl font-bold mb-5 text-marineBlue">

@@ -37,7 +37,7 @@ function Step1() {
 
 	return (
 		<div className="flex flex-col justify-center items-center h-full mt-6">
-			<div className="font-ubuntu flex flex-col justify-between h-full lg:w-4/5 w-full ">
+			<div className="font-ubuntu flex flex-col justify-between h-full  w-full lg:w-4/5 ">
 				<header className="flex flex-col gap-2">
 					<h1 className="font-bold text-2xl text-marineBlue">Personal info</h1>
 					<h2 className="font-medium text-md text-coolGray">
@@ -116,8 +116,10 @@ function Step1() {
 									/>
 								</div>
 							</div>
-							<div className="flex justify-end absolute lg:static z-99 bottom-[-10rem] right-[-4.5rem] bg-white lg:bg-transparent w-screen h-16 items-center px-2 lg:w-full">
-								<Button type="submit" classNameExtra="h-10">Next Step</Button>
+							<div className="flex justify-end absolute lg:static z-99 bottom-[-10rem] right-[-2.5rem] bg-white lg:bg-transparent h-16 items-center px-2 w-screen lg:w-full">
+								<Button type="submit" classNameExtra="h-10">
+									Next Step
+								</Button>
 							</div>
 						</Form>
 					)}
